@@ -9,7 +9,7 @@ public class ProductManagerTest {
     ProductRepository repo = new ProductRepository();
     ProductManager manager = new ProductManager(repo);
 
-    Product product1 = new Book(31, "First book", 100, "Первый А.Б.");
+    Product product1 = new Book(31, "First book", 100, "First Первый А.Б.");
     Product product2 = new Book(32, "Second book", 100, "Второй В.Г.");
     Product product3 = new Book(33, "Third book", 100, "Первый А.Б.");
     Product product4 = new Book(34, "Forth book", 100, "Второй В.Г.");
@@ -19,7 +19,7 @@ public class ProductManagerTest {
     Product product8 = new Smartphone(38, "3562 smart", 100, "Motorola");
     Product product9 = new Smartphone(39, "4568 smart", 100, "Samsung");
     Product product10 = new Smartphone(40, "5689 smart", 100, "Xiaomi");
-    Product product11 = new Product(41, "ProductNobookNoSmart", 40_000);
+    Product product11 = new Product(41, "ProductNoBookNoSmart", 40_000);
 
     public void prepare() {
         manager.add(product1);
@@ -61,10 +61,37 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void shouldFindText() {
+    public void shouldFindTextInNameBook() {
         prepare();
         Product[] expected = {product1, product2, product3, product4, product5};
         Product[] actual = manager.searchBy("book");
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldFindTextInNameSmart() {
+        prepare();
+        Product[] expected = {product6, product7, product8, product9, product10};
+        Product[] actual = manager.searchBy("smart");
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldFindTextInAuthor() {
+        prepare();
+        Product[] expected = {product2, product4};
+        Product[] actual = manager.searchBy("Второй");
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldFindTextInManufacturer() {
+        prepare();
+        Product[] expected = {product7, product10};
+        Product[] actual = manager.searchBy("Xiaomi");
         assertArrayEquals(expected, actual);
 
     }

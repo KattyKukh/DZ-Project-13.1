@@ -11,6 +11,15 @@ public class Product {
         this.price = price;
     }
 
+    public boolean matches(String search) {
+        if (getName().contains(search)) {
+            return true;
+        } else {
+            return false;
+        }
+        // или в одну строку: return product.getName().contains(search);
+    }
+
     public int getId() {
         return id;
     }
@@ -19,19 +28,4 @@ public class Product {
         return name;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
 }
